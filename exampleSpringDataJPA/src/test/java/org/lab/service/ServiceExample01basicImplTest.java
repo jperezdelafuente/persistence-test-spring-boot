@@ -25,12 +25,14 @@ public class ServiceExample01basicImplTest {
 	}
 
 	@Test
-	public void testSaveMovie() {
+	public void testFindAllMovie() {
 		service.saveMovie("Jurasic Park");
+		service.saveMovie("Blade runner");
+		service.saveMovie("King Kong");
 
-		List<Movie> listMovie = service.findMovie("Jurasic Park");
-		Assert.assertEquals(1, listMovie.size());
-		Assert.assertEquals(1, listMovie.get(0).getCode());
-		Assert.assertEquals("Jurasic Park", listMovie.get(0).getTitle());
+		List<Movie> listMovieWithList = service.findAllMovieWithList();
+		Assert.assertEquals(3, listMovieWithList.size());
+
+		service.printMovieWithStream();
 	}
 }

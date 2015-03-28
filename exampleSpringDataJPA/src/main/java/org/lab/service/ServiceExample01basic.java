@@ -10,4 +10,8 @@ public interface ServiceExample01basic {
 
 	public List<Movie> findMovie(String title);
 
+	public List<Movie> findAllMovieWithList();
+
+	public void printMovieWithStream();
+
 }

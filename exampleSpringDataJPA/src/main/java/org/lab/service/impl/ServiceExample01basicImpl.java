@@ -1,6 +1,9 @@
 package org.lab.service.impl;
 
 import java.util.List;
+import java.util.stream.Stream;
+
+import javax.transaction.Transactional;
 
 import org.lab.model.Movie;
 import org.lab.repository.MovieRepository;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class ServiceExample01basicImpl implements ServiceExample01basic {
 
 	@Autowired
@@ -24,4 +28,15 @@ public class ServiceExample01basicImpl implements ServiceExample01basic {
 		return repository.findByTitle(title);
 	}
 
+	@Override
+	public List<Movie> findAllMovieWithList() {
+		return repository.findAllMovies();
+	}
+
+	@Override
+	public void printMovieWithStream() {
+		try (Stream<Movie> streamMovies = repository.streamAllMovies()) {
+			streamMovies.forEach(movie -> System.out.println("Name: " + movie.getTitle()));
+		}
+	}
 }
